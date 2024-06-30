@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Services\GeneratorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,5 +44,22 @@ class User extends Authenticatable
             // 'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($user) {
+            static::generateUsername($user);
+        });
+    }
+
+    public static function generateUsername(User $user)
+    {
+        return 
+            isset($user->attributes['username']) 
+            ? $user->attributes['username'] 
+            : GeneratorService::uniqueFieldValue($user, $user->name, 'username');
     }
 }
