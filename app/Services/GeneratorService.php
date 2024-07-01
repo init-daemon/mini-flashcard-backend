@@ -7,6 +7,7 @@ class GeneratorService
 {
     public static function uniqueFieldValue(Model $model, string $value, string $field = 'username')
     {
+        $value = strtolower($value);
         if($model->where($field, $value)->exists()) {
             $explodedValue = explode(".", $value);
             $oldExt = $explodedValue[count($explodedValue)-1];
@@ -17,7 +18,7 @@ class GeneratorService
                 $value .= ".1";
             }
 
-            static::generateUniqueFieldValue($model, $value, $field);
+            return static::uniqueFieldValue($model, $value, $field);
         } else {
             return $value;
         }

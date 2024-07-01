@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
 use App\Services\GeneratorService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Filterable, Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,7 +53,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function($user) {
-            static::generateUsername($user);
+            $user->attributes['username'] = static::generateUsername($user);
         });
     }
 
