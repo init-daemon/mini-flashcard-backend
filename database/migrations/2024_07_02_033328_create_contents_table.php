@@ -12,21 +12,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-           
-            $table->text("answer");
+            $table->unsignedBigInteger("item_id");
+            $table->unsignedBigInteger("contenable_id");
+            
+            $table->string("contenable_type");
+            $table->text("content");
             $table
-                ->enum("type", MigrationConstant::ANSWER_TYPE)
-                ->default(MigrationConstant::ANSWER_TYPE[0]);
+                ->enum("type", MigrationConstant::CONTENTS["TYPE"])
+                ->default(MigrationConstant::CONTENTS["TYPE"][0]);
 
             $table
-                ->foreign("user_id")
+                ->foreign("item_id")
                 ->references('id')
-                ->on("users")
+                ->on("items")
                 ->onDelete("cascade");
-            
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -37,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('contents');
     }
 };
