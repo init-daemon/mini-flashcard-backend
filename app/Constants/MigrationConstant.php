@@ -3,7 +3,6 @@
 namespace App\Constants;
 
 use App\Enums\ContentTypeEnum;
-use App\Enums\ContentValueTypeEnum;
 class MigrationConstant
 {
     const CONTENTS = [
