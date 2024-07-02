@@ -2,17 +2,15 @@
 
 namespace App\Constants;
 
-use App\Enums\AnswerTypeEnum;
-use App\Enums\QuestionTypeEnum;
+use App\Enums\ContentTypeEnum;
+use App\Enums\ContentValueTypeEnum;
 class MigrationConstant
 {
-    const QUESTION_TYPE = [
-        QuestionTypeEnum::TEXT->value,
-        QuestionTypeEnum::KEYWORD->value,
-        QuestionTypeEnum::IMAGE->value,
-    ];
-    const ANSWER_TYPE   = [
-        AnswerTypeEnum::TEXT->value,
-        AnswerTypeEnum::IMAGE->value,
+    const CONTENTS = [
+        "TYPE" => [
+            ContentTypeEnum::TEXT->value,
+            ContentTypeEnum::KEYWORDS->value,
+            ContentTypeEnum::IMAGE->value,
+        ]
     ];
 }

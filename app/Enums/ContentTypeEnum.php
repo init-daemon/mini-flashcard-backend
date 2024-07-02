@@ -2,8 +2,9 @@
 
 namespace App\Enums;
 
-enum AnswerTypeEnum:string
+enum ContentTypeEnum: string
 {
     case TEXT = 'text';
+    case KEYWORDS = 'keywords';
     case IMAGE = 'image';
 }
